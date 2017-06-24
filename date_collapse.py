@@ -10,7 +10,7 @@ def coalesce_dates(dates):
     >>> dates = [(1,4),(2,8),(12,16),(16,21)]
     >>> cdates = coalesce_dates(dates)
     >>> print(cdates)
-    [(1, 21), (12, 16)]
+    [(1, 8), (12, 21)]
     """
 
     starts = [ date[0] for date in dates ]
@@ -33,7 +33,8 @@ def coalesce_dates(dates):
             else:
                 end = ends.pop(0)
                 count -= 1
-        end = ends.pop()
+        if not starts:
+            end = ends.pop()
         coalesced.append((start,end))
     return coalesced
 
